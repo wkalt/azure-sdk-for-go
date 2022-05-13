@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
-	"github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys/internal/generated"
-	shared "github.com/Azure/azure-sdk-for-go/sdk/keyvault/internal"
+	"github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys/internal/generated"
+	shared "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/internal"
 )
 
 // Properties - The properties of a key managed by the key vault service.

@@ -1,8 +1,8 @@
 # Azure Key Vault Keys client library for Go
 
 * Cryptographic key management (this library) - create, store, and control access to the keys used to encrypt your data
-* Secrets management ([azsecrets](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azsecrets)) - securely store and control access to tokens, passwords, certificates, API keys, and other secrets
-* Certificate management ([azcertificates](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates)) - create, manage, and deploy public and private SSL/TLS certificates
+* Secrets management ([azsecrets](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets)) - securely store and control access to tokens, passwords, certificates, API keys, and other secrets
+* Certificate management ([azcertificates](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates)) - create, manage, and deploy public and private SSL/TLS certificates
 
 [Source code][key_client_src] | [Package (pkg.go.dev)][goget_azkeys] | [Product documentation][keyvault_docs] | [Samples][keys_samples]
 
@@ -10,7 +10,7 @@
 ### Install packages
 Install [azkeys][goget_azkeys] and [azidentity][goget_azidentity] with `go get`:
 ```Bash
-go get github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys
+go get github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys
 go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
 ```
 [azidentity][azure_identity] is used for Azure Active Directory authentication as demonstrated below.
@@ -107,7 +107,7 @@ Constructing the client also requires your vault's URL, which you can get from t
 
 ```go
 import (
-    "github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys"
+    "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys"
     "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
@@ -142,14 +142,14 @@ This section contains code snippets covering common tasks:
 <!-- * [Perform cryptographic operations](#cryptographic-operations) -->
 
 ### Create a key
-[`CreateRSAKey`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys#Client.CreateRSAKey) and
-[`CreateECKey`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys#Client.CreateECKey) create RSA and elliptic curve keys in the vault, respectively. If a key with the same name already exists, a new version of that key is created.
+[`CreateRSAKey`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys#Client.CreateRSAKey) and
+[`CreateECKey`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys#Client.CreateECKey) create RSA and elliptic curve keys in the vault, respectively. If a key with the same name already exists, a new version of that key is created.
 
 ```go
 import (
     "fmt"
 
-    "github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys"
+    "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys"
     "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
@@ -184,12 +184,12 @@ func main() {
 ```
 
 ### Retrieve a key
-[`GetKey`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys#Client.GetKey) retrieves a key previously stored in the Vault.
+[`GetKey`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys#Client.GetKey) retrieves a key previously stored in the Vault.
 ```go
 import (
     "fmt"
 
-    "github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys"
+    "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys"
     "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
@@ -214,11 +214,11 @@ func main() {
 ```
 
 ### Update an existing key
-[`UpdateKeyProperties`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys#Client.UpdateKeyProperties)
+[`UpdateKeyProperties`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys#Client.UpdateKeyProperties)
 updates the properties of a key previously stored in the Key Vault.
 ```go
 import (
-    "github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys"
+    "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys"
     "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
@@ -251,11 +251,11 @@ func main() {
 ```
 
 ### Delete a key
-[`BeginDeleteKey`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys#Client.BeginDeleteKey) requests Key Vault delete a key, returning a poller which allows you to wait for the deletion to finish. Waiting is helpful when the vault has [soft-delete][soft_delete] enabled, and you want to purge (permanently delete) the key as soon as possible. When [soft-delete][soft_delete] is disabled, `BeginDeleteKey` itself is permanent.
+[`BeginDeleteKey`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys#Client.BeginDeleteKey) requests Key Vault delete a key, returning a poller which allows you to wait for the deletion to finish. Waiting is helpful when the vault has [soft-delete][soft_delete] enabled, and you want to purge (permanently delete) the key as soon as possible. When [soft-delete][soft_delete] is disabled, `BeginDeleteKey` itself is permanent.
 
 ```go
 import (
-    "github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys"
+    "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys"
     "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
@@ -289,7 +289,7 @@ In addition, `RotateKey` allows you to rotate a key on-demand by creating a new 
 
 ```go
 import (
-    "github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys"
+    "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys"
     "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
@@ -336,7 +336,7 @@ func main() {
 ```
 
 ### List keys
-[`ListKeys`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys#Client.ListKeys) lists the properties of all of the keys in the client's vault.
+[`ListKeys`](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys#Client.ListKeys) lists the properties of all of the keys in the client's vault.
 
 ```go
 import (
@@ -344,7 +344,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys"
+    "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys"
     "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
@@ -468,14 +468,14 @@ contact opencode@microsoft.com with any additional questions or comments.
 [default_cred_ref]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/azidentity#NewDefaultAzureCredential
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [keyvault_docs]: https://docs.microsoft.com/azure/key-vault/
-[goget_azkeys]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys
+[goget_azkeys]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys
 [rbac_guide]: https://docs.microsoft.com/azure/key-vault/general/rbac-guide
-[reference_docs]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys
-[key_client_docs]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys#Client
-[crypto_client_docs]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys/crypto#Client
-[key_client_src]: https://github.com/Azure/azure-sdk-for-go/tree/main/sdk/keyvault/azkeys/client.go
-[key_samples]: https://github.com/Azure/azure-sdk-for-go/tree/main/sdk/keyvault/azkeys/example_test.go
+[reference_docs]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys
+[key_client_docs]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys#Client
+[crypto_client_docs]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys/crypto#Client
+[key_client_src]: https://github.com/Azure/azure-sdk-for-go/tree/main/sdk/security/keyvault/azkeys/client.go
+[key_samples]: https://github.com/Azure/azure-sdk-for-go/tree/main/sdk/security/keyvault/azkeys/example_test.go
 [soft_delete]: https://docs.microsoft.com/azure/key-vault/general/soft-delete-overview
-[keys_samples]: https://github.com/Azure/azure-sdk-for-go/tree/main/sdk/keyvault/azkeys/example_test.go
+[keys_samples]: https://github.com/Azure/azure-sdk-for-go/tree/main/sdk/security/keyvault/azkeys/example_test.go
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-go%2Fsdk%2Fkeyvault%2Fazkeys%2FREADME.png)

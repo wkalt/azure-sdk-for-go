@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
-	"github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates/internal/generated"
-	shared "github.com/Azure/azure-sdk-for-go/sdk/keyvault/internal"
+	"github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates/internal/generated"
+	shared "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/internal"
 )
 
 // AdministratorContact - Details of the organization administrator of the certificate issuer.

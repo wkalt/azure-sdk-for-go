@@ -23,7 +23,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-var pathToPackage = "sdk/keyvault/azcertificates/testdata"
+var pathToPackage = "sdk/security/keyvault/azcertificates/testdata"
 
 const fakeKvURL = "https://fakekvurl.vault.azure.net/"
 

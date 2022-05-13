@@ -18,13 +18,13 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 	"github.com/Azure/azure-sdk-for-go/sdk/internal/recording"
-	"github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys"
+	"github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys"
 	"github.com/stretchr/testify/require"
 )
 
 const fakeKvURL = "https://fakekvurl.vault.azure.net/"
 
-var pathToPackage = "sdk/keyvault/azkeys/testdata"
+var pathToPackage = "sdk/security/keyvault/azkeys/testdata"
 
 func TestMain(m *testing.M) {
 	// Initialize

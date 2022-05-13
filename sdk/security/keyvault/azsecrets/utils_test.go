@@ -21,7 +21,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-var pathToPackage = "sdk/keyvault/azsecrets/testdata"
+var pathToPackage = "sdk/security/keyvault/azsecrets/testdata"
 
 func createRandomName(t *testing.T, prefix string) (string, error) {
 	h := fnv.New32a()

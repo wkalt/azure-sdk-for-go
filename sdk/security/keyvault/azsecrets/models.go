@@ -9,8 +9,8 @@ package azsecrets
 import (
 	"time"
 
-	"github.com/Azure/azure-sdk-for-go/sdk/keyvault/azsecrets/internal"
-	shared "github.com/Azure/azure-sdk-for-go/sdk/keyvault/internal"
+	"github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets/internal"
+	shared "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/internal"
 )
 
 // DeletedSecret consists of the previous ID, attributes, tags, and information on when it will be purged.

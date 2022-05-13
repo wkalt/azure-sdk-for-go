@@ -17,8 +17,8 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
-	"github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates/internal/generated"
-	shared "github.com/Azure/azure-sdk-for-go/sdk/keyvault/internal"
+	"github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates/internal/generated"
+	shared "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/internal"
 )
 
 // Client is the struct for interacting with a Key Vault Certificates instance.

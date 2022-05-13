@@ -16,8 +16,8 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
-	generated "github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys/internal/generated"
-	shared "github.com/Azure/azure-sdk-for-go/sdk/keyvault/internal"
+	generated "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys/internal/generated"
+	shared "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/internal"
 )
 
 // Client performs cryptographic operations using Azure Key Vault Keys. This client

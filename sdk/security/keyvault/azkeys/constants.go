@@ -8,7 +8,7 @@ package azkeys
 
 import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
-	"github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys/internal/generated"
+	"github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys/internal/generated"
 )
 
 func toGeneratedDeletionRecoveryLevel(s *string) *generated.DeletionRecoveryLevel {

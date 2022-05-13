@@ -32,7 +32,7 @@ var (
 	enableHSM     bool
 	liveMHSMURL   string
 	liveVaultURL  string
-	pathToPackage = "sdk/keyvault/azkeys/testdata"
+	pathToPackage = "sdk/security/keyvault/azkeys/testdata"
 )
 
 func TestMain(m *testing.M) {

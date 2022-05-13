@@ -1,8 +1,8 @@
 # Azure Key Vault Certificates client library for Go
 
 * Certificate management (this library) - create, manage, and deploy public and private SSL/TLS certificates
-* Cryptographic key management (([azkeys](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azkeys))) - create, store, and control access to the keys used to encrypt your data
-* Secrets management ([azsecrets](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azsecrets)) - securely store and control access to tokens, passwords, certificates, API keys, and other secrets
+* Cryptographic key management (([azkeys](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys))) - create, store, and control access to the keys used to encrypt your data
+* Secrets management ([azsecrets](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets)) - securely store and control access to tokens, passwords, certificates, API keys, and other secrets
 
 [Source code][certificates_client_src] | [Package (pkg.go.dev)][reference_docs] |  [Product documentation][keyvault_docs] | [Samples][certificates_samples]
 
@@ -10,7 +10,7 @@
 ### Install the package
 Install [azure-keyvault-certificates][pkggodev_azcerts] and [azidentity][azure_identity_goget] with `go get`:
 ```Bash
-go get github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates
+go get github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates
 go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
 ```
 [azidentity][azure_identity] is used for Azure Active Directory authentication as demonstrated below.
@@ -109,7 +109,7 @@ the vault's "DNS Name".
 
 ```go
 import (
-    "github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates"
+    "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates"
     "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
@@ -142,14 +142,14 @@ This section contains code snippets covering common tasks:
 * [List Properties of Certificates](#list-properties-of-certificates "List Properties of Certificates")
 
 ### Create a Certificate
-[BeginCreateCertificate](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates#Client.BeginCreateCertificate)
+[BeginCreateCertificate](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates#Client.BeginCreateCertificate)
 creates a certificate to be stored in the Azure Key Vault. If a certificate with the same name already exists, a new
 version of the certificate is created. Before creating a certificate, a management policy for the certificate can be
 created or our default policy will be used. This method returns a long running operation poller.
 
 ```go
 import (
-    "github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates"
+    "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates"
     "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
@@ -184,11 +184,11 @@ func main() {
 }
 ```
 If you would like to check the status of your certificate creation, you can call `Poll(ctx context.Context)` on the poller or
-[GetCertificateOperation](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates#Client.GetCertificateOperation)
+[GetCertificateOperation](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates#Client.GetCertificateOperation)
 with the name of the certificate.
 
 ### Retrieve a Certificate
-[GetCertificate](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates#Client.GetCertificate)
+[GetCertificate](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates#Client.GetCertificate)
 retrieves the latest version of a certificate previously stored in the Key Vault.
 ```go
 import (
@@ -196,7 +196,7 @@ import (
 	"os"
 	"fmt"
 
-    "github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates"
+    "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates"
     "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
@@ -232,7 +232,7 @@ func main_GetCertificate() {
 
 
 ### Update properties of an existing Certificate
-[UpdateCertificateProperties](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates#Client.UpdateCertificateProperties)
+[UpdateCertificateProperties](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates#Client.UpdateCertificateProperties)
 updates a certificate previously stored in the Key Vault.
 ```go
 import (
@@ -244,7 +244,7 @@ import (
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
 	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
-	"github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates"
+	"github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates"
 )
 
 func main() {
@@ -284,7 +284,7 @@ func main() {
 ```
 
 ### Delete a Certificate
-[BeginDeleteCertificate](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates#Client.BeginDeleteCertificate)
+[BeginDeleteCertificate](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates#Client.BeginDeleteCertificate)
 requests Key Vault delete a certificate, returning a poller which allows you to wait for the deletion to finish.
 Waiting is helpful when the vault has [soft-delete][soft_delete] enabled, and you want to purge
 (permanently delete) the certificate as soon as possible. When [soft-delete][soft_delete] is disabled,
@@ -300,7 +300,7 @@ import (
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
 	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
-	"github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates"
+	"github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates"
 )
 
 func main() {
@@ -333,7 +333,7 @@ func main() {
 ```
 
 ### List  Certificates
-[NewListCertificatesPager](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates#Client.NewListCertificatesPager)
+[NewListCertificatesPager](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates#Client.NewListCertificatesPager)
 lists the properties of all certificates in the specified Key Vault.
 ```go
 import (
@@ -344,7 +344,7 @@ import (
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
 	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
-	"github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates"
+	"github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates"
 )
 
 func main() {
@@ -446,12 +446,12 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [azure_sub]: https://azure.microsoft.com/free/
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [keyvault_docs]: https://docs.microsoft.com/azure/key-vault/
-[pkggodev_azcerts]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates
+[pkggodev_azcerts]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates
 [certificate_client_docs]: https://aka.ms/azsdk/go/azcertificates
 [rbac_guide]: https://docs.microsoft.com/azure/key-vault/general/rbac-guide
-[reference_docs]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/keyvault/azcertificates
-[certificates_client_src]: https://github.com/Azure/azure-sdk-for-go/tree/main/sdk/keyvault/azcertificates
-[certificates_samples]: https://github.com/Azure/azure-sdk-for-go/tree/main/sdk/keyvault/azcertificates/example_test.go
+[reference_docs]: https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azcertificates
+[certificates_client_src]: https://github.com/Azure/azure-sdk-for-go/tree/main/sdk/security/keyvault/azcertificates
+[certificates_samples]: https://github.com/Azure/azure-sdk-for-go/tree/main/sdk/security/keyvault/azcertificates/example_test.go
 [soft_delete]: https://docs.microsoft.com/azure/key-vault/general/soft-delete-overview
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-go%2Fsdk%2Fkeyvault%2Fazcertificates%2FREADME.png)

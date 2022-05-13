@@ -1,12 +1,14 @@
-module github.com/Azure/azure-sdk-for-go/sdk/keyvault/azsecrets
+module github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azsecrets
 
 go 1.18
+
+replace github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/internal => ../internal
 
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.0.0
 	github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.0.0
 	github.com/Azure/azure-sdk-for-go/sdk/internal v1.0.0
-	github.com/Azure/azure-sdk-for-go/sdk/keyvault/internal v0.5.0
+	github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/internal v0.5.0
 	github.com/stretchr/testify v1.7.0
 )
 
