@@ -19,6 +19,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/internal/mock"
+	"github.com/Azure/azure-sdk-for-go/sdk/internal/recording"
 )
 
 type certTest struct {
@@ -243,4 +244,30 @@ func TestClientCertificateCredential_InvalidCertLive(t *testing.T) {
 	if e.RawResponse == nil {
 		t.Fatal("expected a non-nil RawResponse")
 	}
+}
+
+func TestClientCertificateCredential_Regional(t *testing.T) {
+	if recording.GetRecordMode() != recording.PlaybackMode {
+		t.Skip("this test requires manual recording and can't pass live in CI")
+	}
+
+	t.Setenv(azureRegionalAuthorityName, "westus2")
+	opts, stop := initRecording(t)
+	defer stop()
+
+	f, err := os.ReadFile(liveSP.sniPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	cert, key, err := ParseCertificates(f, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	cred, err := NewClientCertificateCredential(
+		liveSP.tenantID, liveSP.clientID, cert, key, &ClientCertificateCredentialOptions{SendCertificateChain: true, ClientOptions: opts},
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	testGetTokenSuccess(t, cred)
 }
