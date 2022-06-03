@@ -19,7 +19,6 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/internal/mock"
-	"github.com/Azure/azure-sdk-for-go/sdk/internal/recording"
 )
 
 type certTest struct {
@@ -247,10 +246,6 @@ func TestClientCertificateCredential_InvalidCertLive(t *testing.T) {
 }
 
 func TestClientCertificateCredential_Regional(t *testing.T) {
-	if recording.GetRecordMode() != recording.PlaybackMode {
-		t.Skip("this test requires manual recording and can't pass live in CI")
-	}
-
 	t.Setenv(azureRegionalAuthorityName, "westus2")
 	opts, stop := initRecording(t)
 	defer stop()
