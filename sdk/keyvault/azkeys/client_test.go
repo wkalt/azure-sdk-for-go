@@ -478,7 +478,8 @@ func TestUpdateKeyPropertiesImmutable(t *testing.T) {
 			// retry creating the release policy because Key Vault sometimes can't reach
 			// the fake attestation service we use in CI for several minutes after deployment
 			var createResp CreateRSAKeyResponse
-			for i := 0; i < 5; i++ {
+			retries := 10
+			for i := 0; i < retries; i++ {
 				createResp, err = client.CreateRSAKey(ctx, key, &CreateRSAKeyOptions{
 					HardwareProtected: to.Ptr(true),
 					Properties: &Properties{
@@ -493,8 +494,8 @@ func TestUpdateKeyPropertiesImmutable(t *testing.T) {
 				if err == nil {
 					break
 				}
-				if recording.GetRecordMode() != recording.PlaybackMode {
-					time.Sleep(time.Minute)
+				if i < retries-1 {
+					recording.Sleep(30 * time.Second)
 				}
 			}
 			require.NoError(t, err)
