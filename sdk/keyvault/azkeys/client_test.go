@@ -348,7 +348,7 @@ func TestBackupKey(t *testing.T) {
 			_, err = client.PurgeDeletedKey(ctx, key, nil)
 			require.NoError(t, err)
 
-			const retries = 5
+			const retries = 10
 			for i := 0; i < retries; i++ {
 				// unfortunately purging a deleted key is non-deterministic so we
 				// need to retry until we either succeed or hit the retry cap.
@@ -356,9 +356,7 @@ func TestBackupKey(t *testing.T) {
 				if err != nil && i+1 == retries {
 					t.Fatal("retry limit reached")
 				} else if err != nil {
-					if recording.GetRecordMode() != recording.PlaybackMode {
-						time.Sleep(time.Minute)
-					}
+					recording.Sleep(30 * time.Second)
 					continue
 				}
 				require.NoError(t, err)
