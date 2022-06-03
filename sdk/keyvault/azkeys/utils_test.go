@@ -180,14 +180,14 @@ func createClient(t *testing.T, testType string) (*Client, error) {
 }
 
 func delay() *runtime.PollUntilDoneOptions {
-	return &runtime.PollUntilDoneOptions{Frequency: time.Second}
+	opts := &runtime.PollUntilDoneOptions{Frequency: time.Second}
+	if recording.GetRecordMode() == recording.PlaybackMode {
+		opts.Frequency = time.Nanosecond
+	}
+	return opts
 }
 
 func cleanUpKey(t *testing.T, client *Client, key string) {
-	if recording.GetRecordMode() == recording.PlaybackMode {
-		return
-	}
-
 	resp, err := client.BeginDeleteKey(context.Background(), key, nil)
 	if err != nil {
 		return

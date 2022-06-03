@@ -127,7 +127,11 @@ func createClient(t *testing.T) (*Client, error) {
 }
 
 func delay() *runtime.PollUntilDoneOptions {
-	return &runtime.PollUntilDoneOptions{Frequency: time.Second}
+	opts := &runtime.PollUntilDoneOptions{Frequency: time.Second}
+	if recording.GetRecordMode() == recording.PlaybackMode {
+		opts.Frequency = time.Nanosecond
+	}
+	return opts
 }
 
 type FakeCredential struct {

@@ -111,11 +111,11 @@ func createClient(t *testing.T) (*Client, error) {
 }
 
 func getPollingOptions() *runtime.PollUntilDoneOptions {
-	freq := time.Second
-	if recording.GetRecordMode() == recording.RecordingMode {
-		freq = time.Minute
+	opts := &runtime.PollUntilDoneOptions{Frequency: time.Second}
+	if recording.GetRecordMode() == recording.PlaybackMode {
+		opts.Frequency = time.Nanosecond
 	}
-	return &runtime.PollUntilDoneOptions{Frequency: freq}
+	return opts
 }
 
 func cleanUpSecret(t *testing.T, client *Client, secret string) {
